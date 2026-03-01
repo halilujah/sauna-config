@@ -12,31 +12,16 @@ export function SaunaRoof() {
   const features = useConfigStore((s) => s.features);
   const material = useWoodMaterial(exterior);
 
-  // Barrel sauna has its own roof (the barrel itself)
-  if (shape === 'barrel') return null;
-
   const w = mmToM(width);
   const d = mmToM(depth);
   const h = mmToM(height);
   const roofThickness = 0.06;
   const overhang = saunaType === 'outdoor' ? 0.15 : 0.02;
   const isPremiumRoof = features.includes('roof_upgrade');
-
-  if (saunaType === 'indoor') {
-    // Flat ceiling
-    return (
-      <mesh position={[0, h + roofThickness / 2, 0]} castShadow receiveShadow material={material}>
-        <boxGeometry args={[w + overhang * 2, roofThickness, d + overhang * 2]} />
-      </mesh>
-    );
-  }
-
-  // Outdoor peaked (gable) roof
   const roofAngle = isPremiumRoof ? 0.35 : 0.25;
   const roofRise = (w / 2) * Math.tan(roofAngle);
-  const panelLength = (w / 2) / Math.cos(roofAngle) + overhang;
 
-  // Gable end triangles (fill the gap between walls and roof)
+  // Gable geometry — always computed so hook count is stable
   const gableGeom = useMemo(() => {
     const gableShape = new THREE.Shape();
     gableShape.moveTo(-w / 2, 0);
@@ -48,6 +33,21 @@ export function SaunaRoof() {
       bevelEnabled: false,
     });
   }, [w, roofRise]);
+
+  // Barrel sauna has its own roof (the barrel itself)
+  if (shape === 'barrel') return null;
+
+  if (saunaType === 'indoor') {
+    // Flat ceiling
+    return (
+      <mesh position={[0, h + roofThickness / 2, 0]} castShadow receiveShadow material={material}>
+        <boxGeometry args={[w + overhang * 2, roofThickness, d + overhang * 2]} />
+      </mesh>
+    );
+  }
+
+  // Outdoor peaked (gable) roof
+  const panelLength = (w / 2) / Math.cos(roofAngle) + overhang;
 
   return (
     <group position={[0, h, 0]}>
