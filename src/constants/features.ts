@@ -1,0 +1,68 @@
+import type { FeatureOption } from '@/types';
+
+export const DEFAULT_FEATURES: FeatureOption[] = [
+  {
+    id: 'led_strip',
+    name: 'LED Strip Lighting',
+    description: 'Ambient LED strips along bench edges and ceiling',
+    price: 250,
+    category: 'lighting',
+    enabled: true,
+  },
+  {
+    id: 'led_spot',
+    name: 'LED Spot Lights',
+    description: 'Recessed ceiling spotlights for focused illumination',
+    price: 350,
+    category: 'lighting',
+    enabled: true,
+  },
+  {
+    id: 'led_rgb',
+    name: 'RGB Color Lighting',
+    description: 'Color-changing LED system with remote control',
+    price: 500,
+    category: 'lighting',
+    enabled: true,
+  },
+  {
+    id: 'bluetooth_audio',
+    name: 'Bluetooth Sound System',
+    description: 'Waterproof speakers with Bluetooth connectivity',
+    price: 400,
+    category: 'audio',
+    enabled: true,
+  },
+  {
+    id: 'ventilation',
+    name: 'Ventilation System',
+    description: 'Adjustable air intake and exhaust vents',
+    price: 300,
+    category: 'climate',
+    enabled: true,
+  },
+  {
+    id: 'extra_insulation',
+    name: 'Extra Insulation',
+    description: 'Enhanced thermal insulation for energy efficiency',
+    price: 600,
+    category: 'structure',
+    enabled: true,
+  },
+  {
+    id: 'roof_upgrade',
+    name: 'Premium Roof',
+    description: 'Upgraded roofing with better weather protection',
+    price: 450,
+    category: 'structure',
+    enabled: true,
+  },
+  {
+    id: 'window',
+    name: 'Window',
+    description: 'Tempered glass window for natural light',
+    price: 350,
+    category: 'structure',
+    enabled: true,
+  },
+];
